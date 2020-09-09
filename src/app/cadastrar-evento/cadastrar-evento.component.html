@@ -1,0 +1,215 @@
+<h3>Cadastrar Evento</h3>
+<form action="POST"  id="formEvento" #formEvento='ngForm' (ngSubmit)="salvarEvento(formEvento)">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do Evento" [(ngModel)]="evento.nome" >
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label for="data" class="col-sm-12 col-form-label">Data</label>
+            <div class="col-sm-12">
+                <input type="date" class="form-control" id="data" name="data" [(ngModel)]="evento.data">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="hora" class="col-sm-12 col-form-label">Horário</label>
+            <div class="col-sm-12">
+                <input type="time" class="form-control" id="hora" name="hora" [(ngModel)]="evento.hora">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <label for="quantidadePessoas" class="col-sm-12 col-form-label">Quantidade Máxima de Pessoas</label>
+            <div class="col-sm-12">
+                <input type="number" class="form-control" id="quantidadePEssoas" name="quantidadePessoas" [(ngModel)]="evento.quantidadeMaximaDePessoas">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="descricao" class="col-sm-12 col-form-label">Descrição</label>
+            <div class="col-sm-12">
+                <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Descrição do Evento..." [(ngModel)]="evento.descricao"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-4">
+            <label for="endereco" class="col-sm-12 col-form-label">Endereço</label>
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Cadastrar Endereço" aria-describedby="icone" readonly>
+                    <div class="input-group-append">
+                      <span class="input-group-text form-control " id="icone"><a data-toggle="modal" data-target="#modalEndereco"><mat-icon style="color: dimgrey; padding-top: 7px; cursor: pointer; ">add_circle</mat-icon></a></span>
+                    </div>
+                </div>
+            </div>      
+        </div>
+
+        <div class="col-lg-4">
+            <label for="categoria" class="col-sm-12 col-form-label">Categoria</label>
+                <div class="col-sm-12">
+                    <select class="form-control" name="cetegoria" id="categoria" [(ngModel)]="evento.categoria">
+                        <option value="CORPORATIVO">Corporativo</option>
+                        <option value="EDUCACIONAL">Educacional</option>
+                        <option value="ENTRETENIMENTO">Entretenimento</option>
+                        <option value="ESPORTIVO">Esportivo</option>                        
+                        <option value="POLITICO">Político</option>                        
+                        <option value="RELIGIOSO">Religioso</option>                        
+                    </select>
+                </div>
+        </div>
+       
+        <div class="col-lg-4">
+            <label for="imagem" class="col-sm-12 col-form-label">Imagem</label>
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Escolher imagem" aria-describedby="icone" readonly>
+                    <div class="input-group-append">
+                      <span class="input-group-text form-control " id="icone"><a data-toggle="modal" data-target="#modalImagem"><mat-icon style="color: dimgrey; padding-top: 7px; cursor: pointer; ">folder</mat-icon></a></span>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <label for="salvar" class="col-sm-12 col-form-label" style="visibility: hidden;">Salvar Evento</label>
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-secondary btn-block">Salvar Evento</button>
+        </div>
+    </div>
+
+</form>
+
+<div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cadastrar Local do Evento</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="POST" #formEndereco='ngForm'>
+               
+                <div class="form-group row">
+                    <div class="col-sm-8">
+                        <label class="col-sm-12 col-form-label" for="logradouro">Logradouro</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Rua/Av./Alameda/Travessa" [(ngModel)]="endereco.logradouro">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="numero" class="col-sm-12 col-form-label">Número</label>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" id="numero" name="numero" [(ngModel)]="endereco.numero">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label for="numero" class="col-sm-12 col-form-label">Complemento</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="complemento" name="complemento" [(ngModel)]="endereco.complemento">
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-8">
+                        <label for="bairro" class="col-sm-12 col-form-label">Bairro</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="bairro" name="bairro" [(ngModel)]="endereco.bairro">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="numero" class="col-sm-12 col-form-label">CEP</label>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" id="cep" name="cep" [(ngModel)]="endereco.cep">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="estado" class="col-sm-12 col-form-label">Estado</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="estado" id="estado" [(ngModel)]="endereco.estado">
+                                <option value="MG">Minas Gerais</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="DF">Distrito Federal</option>                        
+                                <option value="GO">Goias</option>                        
+                                <option value="RS">Rio Grande do Sul</option>                        
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="cidade" class="col-sm-12 col-form-label">Cidade</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="cidade" id="cidade" [(ngModel)]="endereco.cidade">
+                                <option value="Belo Horizonte">Belo Horizonte</option>
+                                <option value="São Paulo">São Paulo</option>
+                                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                <option value="Brasília">Brasília</option>                        
+                                <option value="Goiânia">Goiânia</option>                        
+                                <option value="Porto Alegre">Porto Alegre</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="salvarEndereco(formEndereco)">Salvar Endereço</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalImagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cadastrar Imagem</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="POST" #formImagem='ngForm'>
+               
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div id="imagemPreview">
+                            <img [src]="previewUrl" class="img-fluid rounded" alt="" *ngIf="previewUrl" id="imagem">
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="imagem" name="imagem" aria-describedby="btnSalvarImagem" (change)="fileProgress($event)">
+                          <label class="custom-file-label" for="imagem">Escolha uma Imagem</label>
+                        </div>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="btnSalvarImagem" (click)="salvarImagem(formImagem)">Salvar</button>
+                        </div>
+                      </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>

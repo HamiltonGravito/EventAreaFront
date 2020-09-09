@@ -1,0 +1,16 @@
+#imagemPreview {
+    margin-bottom: 15px;
+    background-color: dimgrey;
+    border-radius: .25rem;
+    width: 45%;
+    height: 280px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+#imagem {
+    width: 100%;
+    height: 280px;
+}
+
