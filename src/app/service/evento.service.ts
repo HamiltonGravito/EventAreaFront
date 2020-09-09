@@ -18,10 +18,7 @@ export class EventoService {
     }
 
     salvarImagem(formData: FormData){
-        return this.http.post(this.salvarImagemUrl, formData, {
-            reportProgress: true,
-            observe: 'events'
-        });
+        return this.http.post(this.salvarImagemUrl, formData);
     }
 
 }

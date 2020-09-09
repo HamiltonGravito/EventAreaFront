@@ -7,7 +7,7 @@ export class Evento {
     public hora: Date;
     public quantidadeMaximaDePessoas: number;
     public descricao: string;
-    public imagem: File;
+    public imagemPath: string;
     public categoria: string;
     public endereco: Endereco;
 }

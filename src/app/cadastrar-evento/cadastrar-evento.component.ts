@@ -14,6 +14,7 @@ export class CadastrarEventoComponent implements OnInit {
 
   evento: Evento;
   endereco: Endereco;
+  fileimg: File;
   fileUploadProgresso: string = null;
   previewUrl: any = null;
 
@@ -26,7 +27,6 @@ export class CadastrarEventoComponent implements OnInit {
 
   salvarEvento(formEvento: FormGroup): void{
     console.log(this.evento);
-    this.evento.imagem = null;
     this.service.salvarEvento(this.evento)
     .subscribe(resposta => {
       console.log(resposta);
@@ -42,7 +42,7 @@ export class CadastrarEventoComponent implements OnInit {
 
   salvarImagem(formImagem: FormGroup): void {
     const formData: FormData = new FormData();
-    formData.append('file', this.evento.imagem);
+    formData.append('file', this.fileimg);
     this.service.salvarImagem(formData)
       .subscribe(resp => {
         console.log(resp)
@@ -53,19 +53,20 @@ export class CadastrarEventoComponent implements OnInit {
   }
 
 fileProgress(fileInput: any) {
-    this.evento.imagem = <File>fileInput.target.files[0];
+    this.fileimg = <File>fileInput.target.files[0];
+    console.log(this.fileimg);
     this.preview();
 }
 
 preview() {
   // Show preview 
-  var mimeType = this.evento.imagem.type;
+  var mimeType = this.fileimg.type;
   if (mimeType.match(/image\/*/) == null) {
     return;
   }
 
   var reader = new FileReader();      
-  reader.readAsDataURL(this.evento.imagem); 
+  reader.readAsDataURL(this.fileimg); 
   reader.onload = (_event) => { 
     this.previewUrl = reader.result; 
   }
