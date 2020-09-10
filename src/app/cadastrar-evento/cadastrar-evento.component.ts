@@ -3,7 +3,8 @@ import { Evento } from '../shared/evento.model';
 import { EventoService } from '../service/evento.service';
 import { Form, FormGroup } from '@angular/forms';
 import { Endereco } from '../shared/endereco.model';
-import { HttpEventType } from '@angular/common/http';
+import { HttpEventType, HttpEvent, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cadastrar-evento',
@@ -15,7 +16,7 @@ export class CadastrarEventoComponent implements OnInit {
   evento: Evento;
   endereco: Endereco;
   fileimg: File;
-  fileUploadProgresso: string = null;
+  progress: { percentage: number } = { percentage: 0 };
   previewUrl: any = null;
 
   constructor(private service: EventoService) { }
@@ -40,31 +41,28 @@ export class CadastrarEventoComponent implements OnInit {
    });
   }
 
-  salvarImagem(formImagem: FormGroup): void {
-    const formData: FormData = new FormData();
-    formData.append('file', this.fileimg);
-    this.service.salvarImagem(formData)
-      .subscribe(resp => {
-        console.log(resp)
-        $(function () {
-          $('#modalImagem').modal('hide');
-       });
-    });
+  salvarImagem(): void {
+    this.service.salvarImagem(this.fileimg)
+      .subscribe((event => {
+        if(event.type === HttpEventType.UploadProgress){
+          this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        }else if(event instanceof HttpResponse){
+          console.log(event.body);
+          $(function () {
+            $('#modalImagem').modal('hide');
+          });
+        }
+      }))   
   }
 
-fileProgress(fileInput: any) {
-    this.fileimg = <File>fileInput.target.files[0];
-    console.log(this.fileimg);
-    this.preview();
-}
-
-preview() {
-  // Show preview 
+//Exibir preview da Imagem (Recebo um evento do tipo input, dentro desse evento acesso e mostro o File escolhido)
+preview(fileInput: any, formImagem: FormGroup) {
+  this.fileimg = <File>fileInput.target.files[0];
+  console.log(this.fileimg);
   var mimeType = this.fileimg.type;
   if (mimeType.match(/image\/*/) == null) {
     return;
   }
-
   var reader = new FileReader();      
   reader.readAsDataURL(this.fileimg); 
   reader.onload = (_event) => { 

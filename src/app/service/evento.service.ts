@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Evento } from '../shared/evento.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -17,8 +18,13 @@ export class EventoService {
         return this.http.post(this.salvarEventoUrl, evento);
     }
 
-    salvarImagem(formData: FormData){
-        return this.http.post(this.salvarImagemUrl, formData);
+    salvarImagem(file: File): Observable<HttpEvent<{}>>{
+        const formData: FormData = new FormData();
+        formData.append('file', file);
+        const newRequest = new HttpRequest('POST', this.salvarImagemUrl, formData, {
+            reportProgress: true,
+            responseType: 'text'
+        });
+        return this.http.request(newRequest);
     }
-
 }
