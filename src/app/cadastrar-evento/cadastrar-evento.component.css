@@ -14,3 +14,17 @@
     height: 280px;
 }
 
+#cardPreview{
+    margin-bottom: 15px;
+    border-radius: .25rem;
+    width: 60%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+#card {
+    width: 100%;
+    height: 280px;
+}
+
