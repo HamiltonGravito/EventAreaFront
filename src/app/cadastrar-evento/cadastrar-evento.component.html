@@ -223,21 +223,23 @@
             <div class="modal-body">
                 <form action="POST" #formImagem='ngForm'>
 
+                    
                     <div class="row">
-                        <div class="col-sm-12 ">
-                            <div id="imagemPreview">
+                        <div class="col">
+                            <div class="card mb-4">
                                 <img [src]="previewUrl" class="img-fluid rounded" alt="" *ngIf="previewUrl" id="imagem">
                             </div>
-
                         </div>
                     </div>
+                    
+                    
 
                     <div class="modal-footer">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="fileimg" name="fileimg"
                                     aria-describedby="btnSalvarImagem" (change)="preview($event, formImagem)">
-                                <label class="custom-file-label" for="imagem">Escolha uma Imagem</label>
+                                <label class="custom-file-label" for="imagem">Escolher Imagem</label>
                             </div>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" id="btnSalvarImagem"
@@ -263,21 +265,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="cardPreview">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" [src]="previewUrl" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">{{evento.nome}}</h5>
-                            <p class="card-text">{{evento.descricao}}</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-4">
+                            <img class="card-img-top" [src]="previewUrl" alt="" id="imgCard">
+                            <div class="card-body">
+                                <h5 class="card-title">{{evento.nome}}</h5>
+                                <p class="card-text">{{evento.descricao}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><span><sup>Data:
+                                        </sup></span>{{ evento.data | date:'dd/MM/yyyy' }}<span><sup>&ensp;Hora:
+                                        </sup></span>{{ evento.hora }}</li>
+                                <li class="list-group-item"><span><sup>Local: </sup></span>{{ endereco.logradouro }}, nº
+                                    {{ endereco.numero }} ({{ endereco.complemento }}), {{ endereco.bairro }} -
+                                    {{ endereco.cidade }}/{{ endereco.estado }}</li>
+                            </ul>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span><sup>Data:
-                                    </sup></span>{{ evento.data | date:'dd/MM/yyyy' }}<span><sup>&ensp;Hora:
-                                    </sup></span>{{ evento.hora }}</li>
-                            <li class="list-group-item"><span><sup>Local: </sup></span>{{ endereco.logradouro }}, nº
-                                {{ endereco.numero }} ({{ endereco.complemento }}), {{ endereco.bairro }} -
-                                {{ endereco.cidade }}/{{ endereco.estado }}</li>
-                        </ul>
                     </div>
                 </div>
             </div>
