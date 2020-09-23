@@ -74,8 +74,4 @@ export class CadastrarEventoComponent implements OnInit {
     }
   }
 
-  visualizarEvento(){
-
-  }
-
 }

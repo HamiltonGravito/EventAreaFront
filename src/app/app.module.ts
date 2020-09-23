@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CadastrarEventoComponent } from './cadastrar-evento/cadastrar-evento.component';
+import { ExibirEventoComponent } from './exibir-evento/exibir-evento.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CadastrarEventoComponent } from './cadastrar-evento/cadastrar-evento.co
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    CadastrarEventoComponent
+    CadastrarEventoComponent,
+    ExibirEventoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="card-deck">
+        <div class="card mb-4" *ngFor="let evento of eventos">
+            <img class="card-img-top" [src]="evento.imagemPath" alt="" id="imgCard">
+            <div class="card-body">
+                <h5 class="card-title">{{evento.nome}}</h5>
+                <p class="card-text">{{evento.descricao}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span><sup>Data:
+                        </sup></span>{{ evento.data | date:'dd/MM/yyyy' }}<span><sup>&ensp;Hora:
+                        </sup></span>{{ evento.hora }}</li>
+                <li class="list-group-item"><span><sup>Local: </sup></span>{{ evento.endereco.logradouro }}, nº
+                    {{ evento.endereco.numero }} {{ evento.endereco.complemento }}, {{ evento.endereco.bairro }} -
+                    {{ evento.endereco.cidade }}/{{ evento.endereco.estado }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
